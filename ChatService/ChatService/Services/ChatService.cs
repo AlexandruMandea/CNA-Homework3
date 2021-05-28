@@ -18,5 +18,7 @@ namespace ChatService
         {
             _logger = logger;
         }
+
+
     }
 }
