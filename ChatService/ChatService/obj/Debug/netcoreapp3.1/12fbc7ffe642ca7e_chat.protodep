@@ -1,2 +1,3 @@
 obj\Debug\netcoreapp3.1/Chat.cs \
-obj\Debug\netcoreapp3.1/ChatGrpc.cs: Protos/chat.proto
+obj\Debug\netcoreapp3.1/ChatGrpc.cs: C:/Users/Alex/.nuget/packages/grpc.tools/2.27.0/build/native/include/google/protobuf/empty.proto\
+ Protos/chat.proto

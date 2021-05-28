@@ -7,41 +7,69 @@
 
 using grpc = global::Grpc.Core;
 
-namespace ChatService {
-  /// <summary>
-  /// The greeting service definition.
-  /// </summary>
-  public static partial class Greeter
+namespace Service {
+  public static partial class Chat
   {
-    static readonly string __ServiceName = "greet.Greeter";
+    static readonly string __ServiceName = "greet.Chat";
 
-    static readonly grpc::Marshaller<global::ChatService.HelloRequest> __Marshaller_greet_HelloRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::ChatService.HelloRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::ChatService.HelloReply> __Marshaller_greet_HelloReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::ChatService.HelloReply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Service.Message> __Marshaller_greet_Message = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.Message.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.Empty> __Marshaller_google_protobuf_Empty = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Google.Protobuf.WellKnownTypes.Empty.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Service.Reply> __Marshaller_greet_Reply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.Reply.Parser.ParseFrom);
 
-    static readonly grpc::Method<global::ChatService.HelloRequest, global::ChatService.HelloReply> __Method_SayHello = new grpc::Method<global::ChatService.HelloRequest, global::ChatService.HelloReply>(
+    static readonly grpc::Method<global::Service.Message, global::Google.Protobuf.WellKnownTypes.Empty> __Method_ClientToServer = new grpc::Method<global::Service.Message, global::Google.Protobuf.WellKnownTypes.Empty>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "SayHello",
-        __Marshaller_greet_HelloRequest,
-        __Marshaller_greet_HelloReply);
+        "ClientToServer",
+        __Marshaller_greet_Message,
+        __Marshaller_google_protobuf_Empty);
+
+    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::Service.Reply> __Method_ServerToClient = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::Service.Reply>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "ServerToClient",
+        __Marshaller_google_protobuf_Empty,
+        __Marshaller_greet_Reply);
+
+    static readonly grpc::Method<global::Service.Message, global::Google.Protobuf.WellKnownTypes.Empty> __Method_ClientJoined = new grpc::Method<global::Service.Message, global::Google.Protobuf.WellKnownTypes.Empty>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "ClientJoined",
+        __Marshaller_greet_Message,
+        __Marshaller_google_protobuf_Empty);
+
+    static readonly grpc::Method<global::Service.Message, global::Google.Protobuf.WellKnownTypes.Empty> __Method_ClientLeft = new grpc::Method<global::Service.Message, global::Google.Protobuf.WellKnownTypes.Empty>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "ClientLeft",
+        __Marshaller_greet_Message,
+        __Marshaller_google_protobuf_Empty);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
-      get { return global::ChatService.ChatReflection.Descriptor.Services[0]; }
+      get { return global::Service.ChatReflection.Descriptor.Services[0]; }
     }
 
-    /// <summary>Base class for server-side implementations of Greeter</summary>
-    [grpc::BindServiceMethod(typeof(Greeter), "BindService")]
-    public abstract partial class GreeterBase
+    /// <summary>Base class for server-side implementations of Chat</summary>
+    [grpc::BindServiceMethod(typeof(Chat), "BindService")]
+    public abstract partial class ChatBase
     {
-      /// <summary>
-      /// Sends a greeting
-      /// </summary>
-      /// <param name="request">The request received from the client.</param>
-      /// <param name="context">The context of the server-side call handler being invoked.</param>
-      /// <returns>The response to send back to the client (wrapped by a task).</returns>
-      public virtual global::System.Threading.Tasks.Task<global::ChatService.HelloReply> SayHello(global::ChatService.HelloRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Google.Protobuf.WellKnownTypes.Empty> ClientToServer(global::Service.Message request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task ServerToClient(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::IServerStreamWriter<global::Service.Reply> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Google.Protobuf.WellKnownTypes.Empty> ClientJoined(global::Service.Message request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Google.Protobuf.WellKnownTypes.Empty> ClientLeft(global::Service.Message request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -50,19 +78,25 @@ namespace ChatService {
 
     /// <summary>Creates service definition that can be registered with a server</summary>
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
-    public static grpc::ServerServiceDefinition BindService(GreeterBase serviceImpl)
+    public static grpc::ServerServiceDefinition BindService(ChatBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_SayHello, serviceImpl.SayHello).Build();
+          .AddMethod(__Method_ClientToServer, serviceImpl.ClientToServer)
+          .AddMethod(__Method_ServerToClient, serviceImpl.ServerToClient)
+          .AddMethod(__Method_ClientJoined, serviceImpl.ClientJoined)
+          .AddMethod(__Method_ClientLeft, serviceImpl.ClientLeft).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
     /// Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
     /// <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
-    public static void BindService(grpc::ServiceBinderBase serviceBinder, GreeterBase serviceImpl)
+    public static void BindService(grpc::ServiceBinderBase serviceBinder, ChatBase serviceImpl)
     {
-      serviceBinder.AddMethod(__Method_SayHello, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::ChatService.HelloRequest, global::ChatService.HelloReply>(serviceImpl.SayHello));
+      serviceBinder.AddMethod(__Method_ClientToServer, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Service.Message, global::Google.Protobuf.WellKnownTypes.Empty>(serviceImpl.ClientToServer));
+      serviceBinder.AddMethod(__Method_ServerToClient, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Google.Protobuf.WellKnownTypes.Empty, global::Service.Reply>(serviceImpl.ServerToClient));
+      serviceBinder.AddMethod(__Method_ClientJoined, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Service.Message, global::Google.Protobuf.WellKnownTypes.Empty>(serviceImpl.ClientJoined));
+      serviceBinder.AddMethod(__Method_ClientLeft, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Service.Message, global::Google.Protobuf.WellKnownTypes.Empty>(serviceImpl.ClientLeft));
     }
 
   }

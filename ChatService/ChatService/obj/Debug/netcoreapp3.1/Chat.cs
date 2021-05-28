@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace ChatService {
+namespace Service {
 
   /// <summary>Holder for reflection information generated from Protos/chat.proto</summary>
   public static partial class ChatReflection {
@@ -24,33 +24,35 @@ namespace ChatService {
     static ChatReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChFQcm90b3MvY2hhdC5wcm90bxIFZ3JlZXQiHAoMSGVsbG9SZXF1ZXN0EgwK",
-            "BG5hbWUYASABKAkiHQoKSGVsbG9SZXBseRIPCgdtZXNzYWdlGAEgASgJMj0K",
-            "B0dyZWV0ZXISMgoIU2F5SGVsbG8SEy5ncmVldC5IZWxsb1JlcXVlc3QaES5n",
-            "cmVldC5IZWxsb1JlcGx5Qg6qAgtDaGF0U2VydmljZWIGcHJvdG8z"));
+            "ChFQcm90b3MvY2hhdC5wcm90bxIFZ3JlZXQaG2dvb2dsZS9wcm90b2J1Zi9l",
+            "bXB0eS5wcm90byIuCgdNZXNzYWdlEhIKCmNsaWVudE5hbWUYASABKAkSDwoH",
+            "Y29udGVudBgCIAEoCSIYCgVSZXBseRIPCgdtZXNzYWdlGAEgASgJMugBCgRD",
+            "aGF0EjgKDkNsaWVudFRvU2VydmVyEg4uZ3JlZXQuTWVzc2FnZRoWLmdvb2ds",
+            "ZS5wcm90b2J1Zi5FbXB0eRI4Cg5TZXJ2ZXJUb0NsaWVudBIWLmdvb2dsZS5w",
+            "cm90b2J1Zi5FbXB0eRoMLmdyZWV0LlJlcGx5MAESNgoMQ2xpZW50Sm9pbmVk",
+            "Eg4uZ3JlZXQuTWVzc2FnZRoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRI0CgpD",
+            "bGllbnRMZWZ0Eg4uZ3JlZXQuTWVzc2FnZRoWLmdvb2dsZS5wcm90b2J1Zi5F",
+            "bXB0eUIKqgIHU2VydmljZWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { },
+          new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::ChatService.HelloRequest), global::ChatService.HelloRequest.Parser, new[]{ "Name" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ChatService.HelloReply), global::ChatService.HelloReply.Parser, new[]{ "Message" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Service.Message), global::Service.Message.Parser, new[]{ "ClientName", "Content" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Service.Reply), global::Service.Reply.Parser, new[]{ "Message" }, null, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  /// <summary>
-  /// The request message containing the user's name.
-  /// </summary>
-  public sealed partial class HelloRequest : pb::IMessage<HelloRequest> {
-    private static readonly pb::MessageParser<HelloRequest> _parser = new pb::MessageParser<HelloRequest>(() => new HelloRequest());
+  public sealed partial class Message : pb::IMessage<Message> {
+    private static readonly pb::MessageParser<Message> _parser = new pb::MessageParser<Message>(() => new Message());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<HelloRequest> Parser { get { return _parser; } }
+    public static pb::MessageParser<Message> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ChatService.ChatReflection.Descriptor.MessageTypes[0]; }
+      get { return global::Service.ChatReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -59,55 +61,69 @@ namespace ChatService {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public HelloRequest() {
+    public Message() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public HelloRequest(HelloRequest other) : this() {
-      name_ = other.name_;
+    public Message(Message other) : this() {
+      clientName_ = other.clientName_;
+      content_ = other.content_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public HelloRequest Clone() {
-      return new HelloRequest(this);
+    public Message Clone() {
+      return new Message(this);
     }
 
-    /// <summary>Field number for the "name" field.</summary>
-    public const int NameFieldNumber = 1;
-    private string name_ = "";
+    /// <summary>Field number for the "clientName" field.</summary>
+    public const int ClientNameFieldNumber = 1;
+    private string clientName_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Name {
-      get { return name_; }
+    public string ClientName {
+      get { return clientName_; }
       set {
-        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        clientName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "content" field.</summary>
+    public const int ContentFieldNumber = 2;
+    private string content_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Content {
+      get { return content_; }
+      set {
+        content_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as HelloRequest);
+      return Equals(other as Message);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(HelloRequest other) {
+    public bool Equals(Message other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Name != other.Name) return false;
+      if (ClientName != other.ClientName) return false;
+      if (Content != other.Content) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (ClientName.Length != 0) hash ^= ClientName.GetHashCode();
+      if (Content.Length != 0) hash ^= Content.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -121,9 +137,13 @@ namespace ChatService {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Name.Length != 0) {
+      if (ClientName.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteString(Name);
+        output.WriteString(ClientName);
+      }
+      if (Content.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Content);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -133,8 +153,11 @@ namespace ChatService {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      if (ClientName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ClientName);
+      }
+      if (Content.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Content);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -143,12 +166,15 @@ namespace ChatService {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(HelloRequest other) {
+    public void MergeFrom(Message other) {
       if (other == null) {
         return;
       }
-      if (other.Name.Length != 0) {
-        Name = other.Name;
+      if (other.ClientName.Length != 0) {
+        ClientName = other.ClientName;
+      }
+      if (other.Content.Length != 0) {
+        Content = other.Content;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -162,7 +188,11 @@ namespace ChatService {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            Name = input.ReadString();
+            ClientName = input.ReadString();
+            break;
+          }
+          case 18: {
+            Content = input.ReadString();
             break;
           }
         }
@@ -171,18 +201,15 @@ namespace ChatService {
 
   }
 
-  /// <summary>
-  /// The response message containing the greetings.
-  /// </summary>
-  public sealed partial class HelloReply : pb::IMessage<HelloReply> {
-    private static readonly pb::MessageParser<HelloReply> _parser = new pb::MessageParser<HelloReply>(() => new HelloReply());
+  public sealed partial class Reply : pb::IMessage<Reply> {
+    private static readonly pb::MessageParser<Reply> _parser = new pb::MessageParser<Reply>(() => new Reply());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<HelloReply> Parser { get { return _parser; } }
+    public static pb::MessageParser<Reply> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ChatService.ChatReflection.Descriptor.MessageTypes[1]; }
+      get { return global::Service.ChatReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -191,21 +218,21 @@ namespace ChatService {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public HelloReply() {
+    public Reply() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public HelloReply(HelloReply other) : this() {
+    public Reply(Reply other) : this() {
       message_ = other.message_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public HelloReply Clone() {
-      return new HelloReply(this);
+    public Reply Clone() {
+      return new Reply(this);
     }
 
     /// <summary>Field number for the "message" field.</summary>
@@ -221,11 +248,11 @@ namespace ChatService {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as HelloReply);
+      return Equals(other as Reply);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(HelloReply other) {
+    public bool Equals(Reply other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -275,7 +302,7 @@ namespace ChatService {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(HelloReply other) {
+    public void MergeFrom(Reply other) {
       if (other == null) {
         return;
       }
