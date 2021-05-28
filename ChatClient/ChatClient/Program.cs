@@ -18,9 +18,16 @@ namespace ChatClient
             {
                 var dataStream = client.ServerToClient(new Empty());
 
-                await foreach (var message in dataStream.ResponseStream.ReadAllAsync())
+                try
                 {
-                    Console.WriteLine(message.Message);
+                    await foreach (var message in dataStream.ResponseStream.ReadAllAsync())
+                    {
+                        Console.WriteLine(message.Message);
+                    }
+                }
+                catch (RpcException e) when (e.StatusCode == StatusCode.Cancelled)
+                {
+                    Console.WriteLine("Stream cancelled by client.");
                 }
             });
         }
