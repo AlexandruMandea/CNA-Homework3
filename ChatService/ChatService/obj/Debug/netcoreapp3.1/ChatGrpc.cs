@@ -30,17 +30,17 @@ namespace Service {
         __Marshaller_google_protobuf_Empty,
         __Marshaller_greet_Reply);
 
-    static readonly grpc::Method<global::Service.Message, global::Google.Protobuf.WellKnownTypes.Empty> __Method_ClientJoined = new grpc::Method<global::Service.Message, global::Google.Protobuf.WellKnownTypes.Empty>(
+    static readonly grpc::Method<global::Service.Message, global::Google.Protobuf.WellKnownTypes.Empty> __Method_Join = new grpc::Method<global::Service.Message, global::Google.Protobuf.WellKnownTypes.Empty>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "ClientJoined",
+        "Join",
         __Marshaller_greet_Message,
         __Marshaller_google_protobuf_Empty);
 
-    static readonly grpc::Method<global::Service.Message, global::Google.Protobuf.WellKnownTypes.Empty> __Method_ClientLeft = new grpc::Method<global::Service.Message, global::Google.Protobuf.WellKnownTypes.Empty>(
+    static readonly grpc::Method<global::Service.Message, global::Google.Protobuf.WellKnownTypes.Empty> __Method_Leave = new grpc::Method<global::Service.Message, global::Google.Protobuf.WellKnownTypes.Empty>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "ClientLeft",
+        "Leave",
         __Marshaller_greet_Message,
         __Marshaller_google_protobuf_Empty);
 
@@ -64,12 +64,12 @@ namespace Service {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::Google.Protobuf.WellKnownTypes.Empty> ClientJoined(global::Service.Message request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Google.Protobuf.WellKnownTypes.Empty> Join(global::Service.Message request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::Google.Protobuf.WellKnownTypes.Empty> ClientLeft(global::Service.Message request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Google.Protobuf.WellKnownTypes.Empty> Leave(global::Service.Message request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -83,8 +83,8 @@ namespace Service {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_ClientToServer, serviceImpl.ClientToServer)
           .AddMethod(__Method_ServerToClient, serviceImpl.ServerToClient)
-          .AddMethod(__Method_ClientJoined, serviceImpl.ClientJoined)
-          .AddMethod(__Method_ClientLeft, serviceImpl.ClientLeft).Build();
+          .AddMethod(__Method_Join, serviceImpl.Join)
+          .AddMethod(__Method_Leave, serviceImpl.Leave).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -95,8 +95,8 @@ namespace Service {
     {
       serviceBinder.AddMethod(__Method_ClientToServer, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Service.Message, global::Google.Protobuf.WellKnownTypes.Empty>(serviceImpl.ClientToServer));
       serviceBinder.AddMethod(__Method_ServerToClient, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Google.Protobuf.WellKnownTypes.Empty, global::Service.Reply>(serviceImpl.ServerToClient));
-      serviceBinder.AddMethod(__Method_ClientJoined, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Service.Message, global::Google.Protobuf.WellKnownTypes.Empty>(serviceImpl.ClientJoined));
-      serviceBinder.AddMethod(__Method_ClientLeft, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Service.Message, global::Google.Protobuf.WellKnownTypes.Empty>(serviceImpl.ClientLeft));
+      serviceBinder.AddMethod(__Method_Join, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Service.Message, global::Google.Protobuf.WellKnownTypes.Empty>(serviceImpl.Join));
+      serviceBinder.AddMethod(__Method_Leave, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Service.Message, global::Google.Protobuf.WellKnownTypes.Empty>(serviceImpl.Leave));
     }
 
   }

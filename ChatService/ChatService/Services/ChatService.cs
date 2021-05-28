@@ -1,3 +1,4 @@
+using ChatService.Helpers;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
@@ -19,6 +20,19 @@ namespace ChatService
             _logger = logger;
         }
 
+        public override Task<Empty> Join(Message message, ServerCallContext context)
+        {
+            string infoAboutJoining = message.ClientName + " joined the chat.";
 
+            _logger.Log(LogLevel.Information, infoAboutJoining);
+
+            Helper.Messages.Add(new Message()
+            {
+                ClientName = message.ClientName,
+                Content = " joined the chat."
+            });
+
+            return Task.FromResult(new Google.Protobuf.WellKnownTypes.Empty());
+        }
     }
 }

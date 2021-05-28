@@ -7,8 +7,8 @@ package greet;
 service Chat {
   rpc ClientToServer(Message) returns(google.protobuf.Empty);
   rpc ServerToClient(google.protobuf.Empty) returns (stream Reply);
-  rpc ClientJoined(Message) returns(google.protobuf.Empty);
-  rpc ClientLeft(Message) returns(google.protobuf.Empty);
+  rpc Join(Message) returns(google.protobuf.Empty);
+  rpc Leave(Message) returns(google.protobuf.Empty);
 }
 
 message Message{
