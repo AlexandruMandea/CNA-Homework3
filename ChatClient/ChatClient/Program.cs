@@ -3,6 +3,7 @@ using Grpc.Core;
 using Grpc.Net.Client;
 using Service;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ChatClient
@@ -37,6 +38,9 @@ namespace ChatClient
             string name = String.Empty;
             Console.WriteLine("Name: ");
             name = Console.ReadLine();
+
+            Thread recieveMessagesThread = new Thread(new ThreadStart(ServerToClient));
+            recieveMessagesThread.Start();
 
             await client.JoinAsync(new Message { ClientName = name, Content = String.Empty });
 
