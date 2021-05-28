@@ -60,5 +60,25 @@ namespace ChatService
 
             return Task.FromResult(new Google.Protobuf.WellKnownTypes.Empty());
         }
+
+        public override async Task ServerToClient(Empty request, IServerStreamWriter<Reply> responseStream, ServerCallContext context)
+        {
+            bool open = true;
+
+            while (open)
+            {
+                if (Helper.Messages.Last() != Helper.LastMessageSent)
+                {
+                    var message = new Reply()
+                    {
+                        Message = "\n" + Helper.Messages.Last().ClientName + ": " + Helper.Messages.Last().Content
+                    };
+
+                    Helper.LastMessageSent = Helper.Messages.Last();
+
+                    await responseStream.WriteAsync(message);
+                }
+            }
+        }
     }
 }
