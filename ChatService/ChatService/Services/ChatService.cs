@@ -49,5 +49,16 @@ namespace ChatService
 
             return Task.FromResult(new Google.Protobuf.WellKnownTypes.Empty());
         }
+
+        public override Task<Empty> ClientToServer(Message request, ServerCallContext context)
+        {
+            string name = request.ClientName;
+            string content = request.Content;
+            Helper.Messages.Add(request);
+
+            _logger.Log(LogLevel.Information, name + " said: " + content);
+
+            return Task.FromResult(new Google.Protobuf.WellKnownTypes.Empty());
+        }
     }
 }
