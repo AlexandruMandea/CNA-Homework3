@@ -34,7 +34,11 @@ namespace ChatClient
 
         static async Task Main(string[] args)
         {
-            
+            string name = String.Empty;
+            Console.WriteLine("Name: ");
+            name = Console.ReadLine();
+
+            await client.JoinAsync(new Message { ClientName = name, Content = String.Empty });
         }
     }
 }
