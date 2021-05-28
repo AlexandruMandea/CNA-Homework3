@@ -39,6 +39,22 @@ namespace ChatClient
             name = Console.ReadLine();
 
             await client.JoinAsync(new Message { ClientName = name, Content = String.Empty });
+
+            string msg;
+
+            bool isConnected = true;
+            while (isConnected)
+            {
+                msg = Console.ReadLine();
+                if (msg.Equals("EXIT"))
+                {
+                    
+                }
+                else
+                {
+
+                }
+            }
         }
     }
 }
