@@ -48,11 +48,12 @@ namespace ChatClient
                 msg = Console.ReadLine();
                 if (msg.Equals("EXIT"))
                 {
-                    
+                    isConnected = false;
+                    await client.LeaveAsync(new Message { ClientName = name, Content = String.Empty });
                 }
                 else
                 {
-
+                    await client.ClientToServerAsync(new Message { ClientName = name, Content = msg });
                 }
             }
         }
