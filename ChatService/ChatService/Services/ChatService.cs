@@ -22,14 +22,14 @@ namespace ChatService
 
         public override Task<Empty> Join(Message message, ServerCallContext context)
         {
-            string infoAboutJoining = message.ClientName + " joined the chat.";
+            string infoAboutJoining = "\n# " + message.ClientName + " joined the chat." + "\n";
 
             _logger.Log(LogLevel.Information, infoAboutJoining);
 
             Helper.Messages.Add(new Message()
             {
                 ClientName = message.ClientName,
-                Content = " joined the chat."
+                Content = "joined the chat."
             });
 
             return Task.FromResult(new Google.Protobuf.WellKnownTypes.Empty());
@@ -37,14 +37,14 @@ namespace ChatService
 
         public override Task<Empty> Leave(Message message, ServerCallContext context)
         {
-            string infoAboutLeaving = message.ClientName + " left the chat.";
+            string infoAboutLeaving = "\n# " + message.ClientName + " left the chat." + "\n";
 
             _logger.Log(LogLevel.Information, infoAboutLeaving);
 
             Helper.Messages.Add(new Message()
             {
                 ClientName = message.ClientName,
-                Content = " left the chat."
+                Content = "left the chat."
             });
 
             return Task.FromResult(new Google.Protobuf.WellKnownTypes.Empty());
@@ -56,7 +56,7 @@ namespace ChatService
             string content = request.Content;
             Helper.Messages.Add(request);
 
-            _logger.Log(LogLevel.Information, name + " said: " + content);
+            _logger.Log(LogLevel.Information, "\n# " + name + " said: " + content + "\n");
 
             return Task.FromResult(new Google.Protobuf.WellKnownTypes.Empty());
         }
