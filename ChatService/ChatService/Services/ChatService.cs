@@ -65,19 +65,26 @@ namespace ChatService
         {
             bool open = true;
 
-            while (open)
+            try
             {
-                if (Helper.Messages.Last() != Helper.LastMessageSent)
+                while (open)
                 {
-                    var message = new Reply()
+                    if (Helper.Messages.Last() != Helper.LastMessageSent)
                     {
-                        Message = "\n" + Helper.Messages.Last().ClientName + ": " + Helper.Messages.Last().Content
-                    };
+                        var message = new Reply()
+                        {
+                            Message = "\n" + Helper.Messages.Last().ClientName + ": " + Helper.Messages.Last().Content
+                        };
 
-                    Helper.LastMessageSent = Helper.Messages.Last();
+                        Helper.LastMessageSent = Helper.Messages.Last();
 
-                    await responseStream.WriteAsync(message);
+                        await responseStream.WriteAsync(message);
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("\n" + e.Message + "\n");
             }
         }
     }
