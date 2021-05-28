@@ -34,5 +34,20 @@ namespace ChatService
 
             return Task.FromResult(new Google.Protobuf.WellKnownTypes.Empty());
         }
+
+        public override Task<Empty> Leave(Message message, ServerCallContext context)
+        {
+            string infoAboutLeaving = message.ClientName + " left the chat.";
+
+            _logger.Log(LogLevel.Information, infoAboutLeaving);
+
+            Helper.Messages.Add(new Message()
+            {
+                ClientName = message.ClientName,
+                Content = " left the chat."
+            });
+
+            return Task.FromResult(new Google.Protobuf.WellKnownTypes.Empty());
+        }
     }
 }
