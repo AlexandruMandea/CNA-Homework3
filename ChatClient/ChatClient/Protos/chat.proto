@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option csharp_namespace = "Service";
+import "google/protobuf/empty.proto";
+package greet;
+
+service Chat {
+  rpc ClientToServer(Message) returns(google.protobuf.Empty);
+  rpc ServerToClient(google.protobuf.Empty) returns (stream Reply);
+  rpc Join(Message) returns(google.protobuf.Empty);
+  rpc Leave(Message) returns(google.protobuf.Empty);
+}
+
+message Message{
+	string clientName=1;
+	string content=2;
+}
+
+message Reply {
+  string message = 1;
+}
